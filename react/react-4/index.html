@@ -1,0 +1,546 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x73AF;&amp;#x5883;ts-node&amp;#x7531;&amp;#x4E8E;&amp;#x4F7F;&amp;#x7528;&amp;#x4E86;TS,ts-node&amp;#x5C06;&amp;#x4F1A;&amp;#x53D6;&amp;#x4EE3;node&amp;#x5BF9;&amp;#x4EE3;&amp;#x7801;&amp;#x8FDB;&amp;#x884C;&amp;#x89E3;&amp;#x6790;,&amp;#x540C;&amp;#x65F6;&amp;#x4E5F;&amp;#x4F1A;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于React进行框架开发的理解(四) ---- ts-node">
+<meta property="og:url" content="http://yoursite.com/react/react-4/index.html">
+<meta property="og:site_name" content="Aaron Jin's Blog">
+<meta property="og:description" content="&amp;#x73AF;&amp;#x5883;ts-node&amp;#x7531;&amp;#x4E8E;&amp;#x4F7F;&amp;#x7528;&amp;#x4E86;TS,ts-node&amp;#x5C06;&amp;#x4F1A;&amp;#x53D6;&amp;#x4EE3;node&amp;#x5BF9;&amp;#x4EE3;&amp;#x7801;&amp;#x8FDB;&amp;#x884C;&amp;#x89E3;&amp;#x6790;,&amp;#x540C;&amp;#x65F6;&amp;#x4E5F;&amp;#x4F1A;&amp;#">
+<meta property="og:updated_time" content="2016-06-22T10:57:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于React进行框架开发的理解(四) ---- ts-node">
+<meta name="twitter:description" content="&amp;#x73AF;&amp;#x5883;ts-node&amp;#x7531;&amp;#x4E8E;&amp;#x4F7F;&amp;#x7528;&amp;#x4E86;TS,ts-node&amp;#x5C06;&amp;#x4F1A;&amp;#x53D6;&amp;#x4EE3;node&amp;#x5BF9;&amp;#x4EE3;&amp;#x7801;&amp;#x8FDB;&amp;#x884C;&amp;#x89E3;&amp;#x6790;,&amp;#x540C;&amp;#x65F6;&amp;#x4E5F;&amp;#x4F1A;&amp;#">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 基于React进行框架开发的理解(四) ---- ts-node | Aaron Jin's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Aaron Jin's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">不忘初心 方得始终</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于React进行框架开发的理解(四) ---- ts-node
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-06-22T18:57:24+08:00" content="2016-06-22">
+              2016-06-22
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="&#x73AF;&#x5883;"><a href="#&#x73AF;&#x5883;" class="headerlink" title="&#x73AF;&#x5883;"></a>&#x73AF;&#x5883;</h2><h3 id="ts-node"><a href="#ts-node" class="headerlink" title="ts-node"></a>ts-node</h3><p>&#x7531;&#x4E8E;&#x4F7F;&#x7528;&#x4E86;TS,ts-node&#x5C06;&#x4F1A;&#x53D6;&#x4EE3;node&#x5BF9;&#x4EE3;&#x7801;&#x8FDB;&#x884C;&#x89E3;&#x6790;,&#x540C;&#x65F6;&#x4E5F;&#x4F1A;&#x83B7;&#x53D6;&#x76EE;&#x5F55;&#x4E0B;&#x7684;tsconfig&#x548C;&#x6240;&#x6709;&#x7684;.d.ts&#x6765;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;</p>
+<h3 id="mongoose"><a href="#mongoose" class="headerlink" title="mongoose"></a>mongoose</h3><p>&#x5728;node&#x4E2D;&#x4F7F;&#x7528;mongodb,&#x6700;&#x4F73;&#x65B9;&#x5F0F;&#x662F;&#x4F7F;&#x7528;mongoose&#x8FDB;&#x884C;&#x8FDE;&#x63A5;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> mongoose <span class="keyword">from</span> <span class="string">&apos;mongoose&apos;</span>;</span><br><span class="line"><span class="keyword">const</span> db = <span class="string">&apos;mongodb://localhost/redux&apos;</span>;</span><br><span class="line"><span class="keyword">var</span> connect = ()=&gt; {</span><br><span class="line">    <span class="keyword">let</span> options = {server: {socketOptions: {keepAlive: <span class="number">1</span>}}};</span><br><span class="line">    mongoose.connect(db, options);</span><br><span class="line">};</span><br><span class="line">connect();</span><br></pre></td></tr></table></figure>
+<h3 id="Webpack-middleware"><a href="#Webpack-middleware" class="headerlink" title="Webpack middleware"></a>Webpack middleware</h3><p>&#x5728;node&#x4E2D;&#x4F7F;&#x7528;devMiddleware&#x548C;hotMiddleware,&#x7528;&#x6765;&#x5728;Webpack&#x914D;&#x7F6E;&#x5F00;&#x53D1;&#x6A21;&#x5F0F;</p>
+<h3 id="router"><a href="#router" class="headerlink" title="router"></a>router</h3><p>&#x4F7F;&#x7528;express&#x4E2D;&#x7684;Router&#x529F;&#x80FD;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> {Router} <span class="keyword">from</span> <span class="string">&apos;express&apos;</span>;</span><br><span class="line"><span class="keyword">const</span> router = Router();</span><br><span class="line">router.get(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>{</span><br><span class="line">    res.render(<span class="string">&apos;index/index&apos;</span>, {</span><br><span class="line">        title: <span class="string">&apos;index&apos;</span></span><br><span class="line">    });</span><br><span class="line">});</span><br></pre></td></tr></table></figure></p>
+<h3 id="Models"><a href="#Models" class="headerlink" title="Models"></a>Models</h3><p>&#x5728;ts-node&#x4E2D;,&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x5230;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x7684;Interface,Mongoose&#x7684;Schema&#x4EE5;&#x53CA;&#x7A7A;&#x6570;&#x636E;&#x7684;Model&#x683C;&#x5F0F;,&#x56E0;&#x6B64;&#x6BCF;&#x4E2A;model&#x90FD;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x8FD9;3&#x4E2A;&#x90E8;&#x5206;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//User</span></span><br><span class="line"><span class="keyword">export</span> interface Interface {</span><br><span class="line">    UUID:string,</span><br><span class="line">    department:string,</span><br><span class="line">    mobile:string,</span><br><span class="line">    name: string</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> Schema = {</span><br><span class="line">    UUID: <span class="built_in">String</span>,</span><br><span class="line">    department: <span class="built_in">String</span>,</span><br><span class="line">    mobile: <span class="built_in">String</span>,</span><br><span class="line">    name: <span class="built_in">String</span>,</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> Model = {</span><br><span class="line">    UUID: <span class="string">&apos;&apos;</span>,</span><br><span class="line">    department: <span class="string">&apos;&apos;</span>,</span><br><span class="line">    mobile: <span class="string">&apos;&apos;</span>,</span><br><span class="line">    name: <span class="string">&apos;&apos;</span>,</span><br><span class="line">};</span><br></pre></td></tr></table></figure></p>
+<h2 id="&#x9879;&#x76EE;&#x5FC3;&#x5F97;"><a href="#&#x9879;&#x76EE;&#x5FC3;&#x5F97;" class="headerlink" title="&#x9879;&#x76EE;&#x5FC3;&#x5F97;"></a>&#x9879;&#x76EE;&#x5FC3;&#x5F97;</h2><h3 id="&#x6570;&#x636E;&#x5B9A;&#x4E49;"><a href="#&#x6570;&#x636E;&#x5B9A;&#x4E49;" class="headerlink" title="&#x6570;&#x636E;&#x5B9A;&#x4E49;"></a>&#x6570;&#x636E;&#x5B9A;&#x4E49;</h3><p>&#x5728;ts-node&#x4E0B;,&#x5927;&#x90E8;&#x5206;&#x7684;&#x7F16;&#x5199;&#x4E0E;node&#x4E0B;&#x5E76;&#x65E0;&#x4E0D;&#x540C;,&#x53EA;&#x662F;&#x524D;&#x540E;&#x7AEF;&#x7684;&#x6570;&#x636E;&#x90FD;&#x53EF;&#x4EE5;&#x7531;TS&#x6765;&#x8FDB;&#x884C;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;,&#x56E0;&#x6B64;&#x4E00;&#x4E2A;&#x7EDF;&#x4E00;&#x7684;Model&#x662F;&#x5F88;&#x6709;&#x5FC5;&#x8981;&#x7684;,&#x53EA;&#x662F;Model&#x7684;3&#x4E2A;&#x90E8;&#x5206;&#x5C1A;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x590D;&#x7528;&#x7684;&#x65B9;&#x5F0F;</p>
+<h3 id="&#x524D;&#x7AEF;&#x548C;&#x540E;&#x7AEF;&#x901A;&#x8BAF;json&#x6216;string&#x9700;&#x8981;&#x901A;&#x8FC7;headers&#x8BBE;&#x7F6E;"><a href="#&#x524D;&#x7AEF;&#x548C;&#x540E;&#x7AEF;&#x901A;&#x8BAF;json&#x6216;string&#x9700;&#x8981;&#x901A;&#x8FC7;headers&#x8BBE;&#x7F6E;" class="headerlink" title="&#x524D;&#x7AEF;&#x548C;&#x540E;&#x7AEF;&#x901A;&#x8BAF;json&#x6216;string&#x9700;&#x8981;&#x901A;&#x8FC7;headers&#x8BBE;&#x7F6E;"></a>&#x524D;&#x7AEF;&#x548C;&#x540E;&#x7AEF;&#x901A;&#x8BAF;json&#x6216;string&#x9700;&#x8981;&#x901A;&#x8FC7;headers&#x8BBE;&#x7F6E;</h3><p> headers: {<br>                &#x2018;Content-Type&#x2019;: &#x2018;application/json&#x2019;<br>            }<br>application/json&#x53EF;&#x4EE5;&#x4F20;&#x9012;json<br>x-www-form-urlencoded&#x53EF;&#x4EE5;&#x4F20;&#x9012;&#x5B57;&#x7B26;&#x4E32;<br>&#x4E0D;&#x53EF;&#x4E32;&#x7528;,&#x5426;&#x5219;&#x540E;&#x7AEF;&#x83B7;&#x53D6;&#x4E0D;&#x5230;&#x6570;&#x636E;<br>&#x540E;&#x7AEF;&#x9700;&#x8981;&#x6DFB;&#x52A0;<br>app.use(bodyParser.json());<br>app.use(bodyParser.urlencoded({ extended: true }));</p>
+<h2 id="&#x76EE;&#x5F55;"><a href="#&#x76EE;&#x5F55;" class="headerlink" title="&#x76EE;&#x5F55;"></a>&#x76EE;&#x5F55;</h2><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E00;-&#x2014;-&#x9879;&#x76EE;&#x5B89;&#x88C5;"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E00;-&#x2014;-&#x9879;&#x76EE;&#x5B89;&#x88C5;" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E00;) &#x2014;- &#x9879;&#x76EE;&#x5B89;&#x88C5;"></a><a href="/react/react-1/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E00;) &#x2014;- &#x9879;&#x76EE;&#x5B89;&#x88C5;</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E8C;-&#x2014;-webpack"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E8C;-&#x2014;-webpack" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E8C;) &#x2014;- webpack"></a><a href="/react/react-2/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E8C;) &#x2014;- webpack</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E09;-&#x2014;-typescript"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E09;-&#x2014;-typescript" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E09;) &#x2014;- typescript"></a><a href="/react/react-3/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E09;) &#x2014;- typescript</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x56DB;-&#x2014;-ts-node"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x56DB;-&#x2014;-ts-node" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x56DB;) &#x2014;- ts-node"></a><a href="/react/react-4/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x56DB;) &#x2014;- ts-node</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E94;-&#x2014;-react"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E94;-&#x2014;-react" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E94;) &#x2014;- react"></a><a href="/react/react-5/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E94;) &#x2014;- react</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x516D;-&#x2014;-redux"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x516D;-&#x2014;-redux" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x516D;) &#x2014;- redux"></a><a href="/react/react-6/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x516D;) &#x2014;- redux</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E03;-&#x2014;-&#x9879;&#x76EE;&#x4F5C;&#x7528;"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E03;-&#x2014;-&#x9879;&#x76EE;&#x4F5C;&#x7528;" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E03;) &#x2014;- &#x9879;&#x76EE;&#x4F5C;&#x7528;"></a><a href="/react/react-7/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E03;) &#x2014;- &#x9879;&#x76EE;&#x4F5C;&#x7528;</a></h3>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/react/react-5/" rel="next" title="基于React进行框架开发的理解(五) ---- react">
+                <i class="fa fa-chevron-left"></i> 基于React进行框架开发的理解(五) ---- react
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/react/react-3/" rel="prev" title="基于React进行框架开发的理解(三) ---- typescript">
+                基于React进行框架开发的理解(三) ---- typescript <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Aaron Jin" />
+          <p class="site-author-name" itemprop="name">Aaron Jin</p>
+          <p class="site-description motion-element" itemprop="description">前端研究笔记</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ts-node"><span class="nav-number">1.1.</span> <span class="nav-text">ts-node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoose"><span class="nav-number">1.2.</span> <span class="nav-text">mongoose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webpack-middleware"><span class="nav-number">1.3.</span> <span class="nav-text">Webpack middleware</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#router"><span class="nav-number">1.4.</span> <span class="nav-text">router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Models"><span class="nav-number">1.5.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目心得"><span class="nav-number">2.</span> <span class="nav-text">项目心得</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据定义"><span class="nav-number">2.1.</span> <span class="nav-text">数据定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端和后端通讯json或string需要通过headers设置"><span class="nav-number">2.2.</span> <span class="nav-text">前端和后端通讯json或string需要通过headers设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">3.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-一-—-项目安装"><span class="nav-number">3.1.</span> <span class="nav-text">基于React进行框架开发的理解(一) —- 项目安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-二-—-webpack"><span class="nav-number">3.2.</span> <span class="nav-text">基于React进行框架开发的理解(二) —- webpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-三-—-typescript"><span class="nav-number">3.3.</span> <span class="nav-text">基于React进行框架开发的理解(三) —- typescript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-四-—-ts-node"><span class="nav-number">3.4.</span> <span class="nav-text">基于React进行框架开发的理解(四) —- ts-node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-五-—-react"><span class="nav-number">3.5.</span> <span class="nav-text">基于React进行框架开发的理解(五) —- react</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-六-—-redux"><span class="nav-number">3.6.</span> <span class="nav-text">基于React进行框架开发的理解(六) —- redux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-七-—-项目作用"><span class="nav-number">3.7.</span> <span class="nav-text">基于React进行框架开发的理解(七) —- 项目作用</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron Jin</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

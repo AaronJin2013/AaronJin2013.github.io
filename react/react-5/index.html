@@ -1,0 +1,552 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x4ECB;&amp;#x7ECD;React &amp;#x662F;&amp;#x4E00;&amp;#x4E2A; Facebook &amp;#x548C; Instagram &amp;#x7528;&amp;#x6765;&amp;#x521B;&amp;#x5EFA;&amp;#x7528;&amp;#x6237;&amp;#x754C;&amp;#x9762;&amp;#x7684; JavaScript &amp;#x5E93;&amp;#x3002;&amp;#x5F88;&amp;#x591A;&amp;#x4EBA;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于React进行框架开发的理解(五) ---- react">
+<meta property="og:url" content="http://yoursite.com/react/react-5/index.html">
+<meta property="og:site_name" content="Aaron Jin's Blog">
+<meta property="og:description" content="&amp;#x4ECB;&amp;#x7ECD;React &amp;#x662F;&amp;#x4E00;&amp;#x4E2A; Facebook &amp;#x548C; Instagram &amp;#x7528;&amp;#x6765;&amp;#x521B;&amp;#x5EFA;&amp;#x7528;&amp;#x6237;&amp;#x754C;&amp;#x9762;&amp;#x7684; JavaScript &amp;#x5E93;&amp;#x3002;&amp;#x5F88;&amp;#x591A;&amp;#x4EBA;&amp;">
+<meta property="og:updated_time" content="2016-06-22T10:57:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于React进行框架开发的理解(五) ---- react">
+<meta name="twitter:description" content="&amp;#x4ECB;&amp;#x7ECD;React &amp;#x662F;&amp;#x4E00;&amp;#x4E2A; Facebook &amp;#x548C; Instagram &amp;#x7528;&amp;#x6765;&amp;#x521B;&amp;#x5EFA;&amp;#x7528;&amp;#x6237;&amp;#x754C;&amp;#x9762;&amp;#x7684; JavaScript &amp;#x5E93;&amp;#x3002;&amp;#x5F88;&amp;#x591A;&amp;#x4EBA;&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 基于React进行框架开发的理解(五) ---- react | Aaron Jin's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Aaron Jin's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">不忘初心 方得始终</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于React进行框架开发的理解(五) ---- react
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-06-22T18:57:24+08:00" content="2016-06-22">
+              2016-06-22
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="&#x4ECB;&#x7ECD;"><a href="#&#x4ECB;&#x7ECD;" class="headerlink" title="&#x4ECB;&#x7ECD;"></a>&#x4ECB;&#x7ECD;</h2><p>React &#x662F;&#x4E00;&#x4E2A; Facebook &#x548C; Instagram &#x7528;&#x6765;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x754C;&#x9762;&#x7684; JavaScript &#x5E93;&#x3002;<br>&#x5F88;&#x591A;&#x4EBA;&#x8BA4;&#x4E3A; React &#x662F; MVC &#x4E2D;&#x7684; V&#xFF08;&#x89C6;&#x56FE;&#xFF09;&#x3002;<br>&#x6211;&#x4EEC;&#x521B;&#x9020; React &#x662F;&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;&#x6784;&#x5EFA;&#x968F;&#x7740;&#x65F6;&#x95F4;&#x6570;&#x636E;&#x4E0D;&#x65AD;&#x53D8;&#x5316;&#x7684;&#x5927;&#x89C4;&#x6A21;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;&#x4E3A;&#x4E86;&#x8FBE;&#x5230;&#x8FD9;&#x4E2A;&#x76EE;&#x6807;&#xFF0C;React &#x91C7;&#x7528;&#x4E0B;&#x9762;&#x4E24;&#x4E2A;&#x4E3B;&#x8981;&#x7684;&#x601D;&#x60F3;&#x3002;</p>
+<h2 id="&#x7279;&#x6027;"><a href="#&#x7279;&#x6027;" class="headerlink" title="&#x7279;&#x6027;"></a>&#x7279;&#x6027;</h2><h3 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h3><p>JSX &#x662F;&#x4E00;&#x4E2A;&#x770B;&#x8D77;&#x6765;&#x5F88;&#x50CF; XML &#x7684; JavaScript &#x8BED;&#x6CD5;&#x6269;&#x5C55;&#x3002;React &#x53EF;&#x4EE5;&#x7528;&#x6765;&#x505A;&#x7B80;&#x5355;&#x7684; JSX &#x53E5;&#x6CD5;&#x8F6C;&#x6362;&#x3002;</p>
+<h3 id="&#x4E8B;&#x4EF6;"><a href="#&#x4E8B;&#x4EF6;" class="headerlink" title="&#x4E8B;&#x4EF6;"></a>&#x4E8B;&#x4EF6;</h3><p> React &#x5B9E;&#x9645;&#x5E76;&#x6CA1;&#x6709;&#x628A;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x5668;&#x7ED1;&#x5B9A;&#x5230;&#x8282;&#x70B9;&#x672C;&#x8EAB;&#x3002;&#x5F53; React &#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x5728;&#x6700;&#x5916;&#x5C42;&#x4F7F;&#x7528;&#x552F;&#x4E00;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#x5904;&#x7406;&#x6240;&#x6709;&#x4E8B;&#x4EF6;&#x3002;&#x5F53;&#x7EC4;&#x4EF6;&#x88AB;&#x52A0;&#x8F7D;&#x548C;&#x5378;&#x8F7D;&#x65F6;&#xFF0C;&#x53EA;&#x662F;&#x5728;&#x5185;&#x90E8;&#x6620;&#x5C04;&#x91CC;&#x6DFB;&#x52A0;&#x6216;&#x5220;&#x9664;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x5668;&#x3002;&#x5F53;&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#xFF0C;React &#x6839;&#x636E;&#x6620;&#x5C04;&#x6765;&#x51B3;&#x5B9A;&#x5982;&#x4F55;&#x5206;&#x53D1;&#x3002;&#x5F53;&#x6620;&#x5C04;&#x91CC;&#x5904;&#x7406;&#x5668;&#x65F6;&#xFF0C;&#x4F1A;&#x5F53;&#x4F5C;&#x7A7A;&#x64CD;&#x4F5C;&#x5904;&#x7406;&#x3002;</p>
+<h3 id="&#x7EC4;&#x4EF6;"><a href="#&#x7EC4;&#x4EF6;" class="headerlink" title="&#x7EC4;&#x4EF6;"></a>&#x7EC4;&#x4EF6;</h3><p>&#x7EC4;&#x4EF6;&#x5176;&#x5B9E;&#x662F;&#x72B6;&#x6001;&#x673A;&#xFF08;State Machines&#xFF09;<br>React &#x628A;&#x7528;&#x6237;&#x754C;&#x9762;&#x5F53;&#x4F5C;&#x7B80;&#x5355;&#x72B6;&#x6001;&#x673A;&#x3002;&#x628A;&#x7528;&#x6237;&#x754C;&#x9762;&#x60F3;&#x50CF;&#x6210;&#x62E5;&#x6709;&#x4E0D;&#x540C;&#x72B6;&#x6001;&#x7136;&#x540E;&#x6E32;&#x67D3;&#x8FD9;&#x4E9B;&#x72B6;&#x6001;&#xFF0C;&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x8BA9;&#x7528;&#x6237;&#x754C;&#x9762;&#x548C;&#x6570;&#x636E;&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#x3002;<br>React &#x91CC;&#xFF0C;&#x53EA;&#x9700;&#x66F4;&#x65B0;&#x7EC4;&#x4EF6;&#x7684; state&#xFF0C;&#x7136;&#x540E;&#x6839;&#x636E;&#x65B0;&#x7684; state &#x91CD;&#x65B0;&#x6E32;&#x67D3;&#x7528;&#x6237;&#x754C;&#x9762;&#xFF08;&#x4E0D;&#x8981;&#x64CD;&#x4F5C; DOM&#xFF09;&#x3002;React &#x6765;&#x51B3;&#x5B9A;&#x5982;&#x4F55;&#x6700;&#x9AD8;&#x6548;&#x5730;&#x66F4;&#x65B0; DOM&#x3002;</p>
+<h3 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h3><p>React &#x91CC;&#x6709;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x5E38;&#x7528;&#x7684;&#x6A21;&#x5F0F;&#x5C31;&#x662F;&#x5BF9;&#x7EC4;&#x4EF6;&#x505A;&#x4E00;&#x5C42;&#x62BD;&#x8C61;&#x3002;&#x7EC4;&#x4EF6;&#x5BF9;&#x5916;&#x516C;&#x5F00;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x5C5E;&#x6027;&#xFF08;Props&#xFF09;&#x6765;&#x5B9E;&#x73B0;&#x529F;&#x80FD;&#xFF0C;&#x4F46;&#x5185;&#x90E8;&#x7EC6;&#x8282;&#x53EF;&#x80FD;&#x6709;&#x975E;&#x5E38;&#x590D;&#x6742;&#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+<h3 id="&#x865A;&#x62DF;DOM"><a href="#&#x865A;&#x62DF;DOM" class="headerlink" title="&#x865A;&#x62DF;DOM"></a>&#x865A;&#x62DF;DOM</h3><p>React&#x662F;&#x5F88;&#x5FEB;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4ECE;&#x4E0D;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;DOM&#x3002;React&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7EF4;&#x62A4;&#x4E00;&#x4E2A;&#x5FEB;&#x901F;&#x54CD;&#x5E94;&#x7684;DOM&#x63CF;&#x8FF0;&#x3002;render()&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;DOM&#x7684;&#x63CF;&#x8FF0;&#xFF0C;React&#x80FD;&#x591F;&#x5229;&#x7528;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x63CF;&#x8FF0;&#x6765;&#x5FEB;&#x901F;&#x5730;&#x8BA1;&#x7B97;&#x51FA;&#x5DEE;&#x5F02;&#xFF0C;&#x7136;&#x540E;&#x66F4;&#x65B0;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x7684;DOM&#x3002;</p>
+<h3 id="&#x7EC4;&#x4EF6;&#x751F;&#x547D;&#x5468;&#x671F;"><a href="#&#x7EC4;&#x4EF6;&#x751F;&#x547D;&#x5468;&#x671F;" class="headerlink" title="&#x7EC4;&#x4EF6;&#x751F;&#x547D;&#x5468;&#x671F;"></a>&#x7EC4;&#x4EF6;&#x751F;&#x547D;&#x5468;&#x671F;</h3><p>&#x7EC4;&#x4EF6;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x5305;&#x542B;&#x4E09;&#x4E2A;&#x4E3B;&#x8981;&#x90E8;&#x5206;&#xFF1A;</p>
+<p>&#x6302;&#x8F7D;&#xFF1A; &#x7EC4;&#x4EF6;&#x88AB;&#x63D2;&#x5165;&#x5230;DOM&#x4E2D;&#x3002;<br>&#x66F4;&#x65B0;&#xFF1A; &#x7EC4;&#x4EF6;&#x88AB;&#x91CD;&#x65B0;&#x6E32;&#x67D3;&#xFF0C;&#x67E5;&#x660E;DOM&#x662F;&#x5426;&#x5E94;&#x8BE5;&#x5237;&#x65B0;&#x3002;<br>&#x79FB;&#x9664;&#xFF1A; &#x7EC4;&#x4EF6;&#x4ECE;DOM&#x4E2D;&#x79FB;&#x9664;&#x3002;<br>React&#x63D0;&#x4F9B;&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x4E2D;&#x653E;&#x5165;&#x81EA;&#x5DF1;&#x7684;&#x4EE3;&#x7801;&#x3002;will&#x65B9;&#x6CD5;&#xFF0C;&#x4F1A;&#x5728;&#x67D0;&#x4E9B;&#x884C;&#x4E3A;&#x53D1;&#x751F;&#x4E4B;&#x524D;&#x8C03;&#x7528;&#xFF0C;&#x548C;did&#x65B9;&#x6CD5;&#xFF0C;&#x4F1A;&#x5728;&#x67D0;&#x4E9B;&#x884C;&#x4E3A;&#x53D1;&#x751F;&#x4E4B;&#x540E;&#x8C03;&#x7528;&#x3002;</p>
+<h2 id="&#x9879;&#x76EE;&#x5FC3;&#x5F97;"><a href="#&#x9879;&#x76EE;&#x5FC3;&#x5F97;" class="headerlink" title="&#x9879;&#x76EE;&#x5FC3;&#x5F97;"></a>&#x9879;&#x76EE;&#x5FC3;&#x5F97;</h2><h3 id="&#x9009;&#x62E9;React&#x7684;&#x7406;&#x7531;"><a href="#&#x9009;&#x62E9;React&#x7684;&#x7406;&#x7531;" class="headerlink" title="&#x9009;&#x62E9;React&#x7684;&#x7406;&#x7531;"></a>&#x9009;&#x62E9;React&#x7684;&#x7406;&#x7531;</h3><p>&#x4E0E;&#x8FC7;&#x53BB;&#x7684;MVC&#x76F8;&#x6BD4;,React&#x53EA;&#x662F;&#x4E00;&#x4E2A;View&#x5C42;&#x9762;&#x7684;&#x6846;&#x67B6;,&#x8FD9;&#x4F7F;&#x5F97;&#x5B83;&#x4E0D;&#x80FD;&#x5B8C;&#x6574;&#x7684;&#x53BB;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x5E94;&#x7528;,&#x5FC5;&#x987B;&#x642D;&#x8F7D;&#x66F4;&#x591A;&#x5176;&#x4ED6;&#x7684;&#x6846;&#x67B6;&#x624D;&#x80FD;&#x505A;&#x5230;&#x4E4B;&#x524D;&#x7531;&#x4E00;&#x4E2A;&#x6846;&#x67B6;&#x5C31;&#x80FD;&#x5B8C;&#x6210;&#x7684;&#x5DE5;&#x4F5C;,&#x5C31;&#x6B64;&#x800C;&#x8A00;,React&#x662F;&#x5F31;&#x5C0F;&#x7684;<br>&#x7136;&#x800C;&#x6B63;&#x662F;&#x7531;&#x4E8E;&#x8FD9;&#x79CD;&#x820D;&#x5F03;,&#x4F7F;&#x5F97;&#x9879;&#x76EE;&#x7684;&#x6784;&#x5EFA;&#x83B7;&#x5F97;&#x4E86;&#x66F4;&#x5927;&#x7684;&#x7075;&#x6D3B;&#x6027;&#x53CA;&#x53EF;&#x80FD;&#x6027;,&#x4E5F;&#x4E3A;&#x672A;&#x6765;&#x53EF;&#x80FD;&#x7684;&#x91CD;&#x6784;&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x65B9;&#x4FBF;&#x7684;&#x9014;&#x5F84;</p>
+<h3 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h3><p>&#x4E3A;&#x4E86;&#x80FD;&#x591F;&#x4E32;&#x8054;View&#x5C42;&#x9762;&#x7684;&#x6846;&#x67B6;,&#x800C;&#x975E;&#x5355;&#x7EAF;&#x7684;&#x7EC4;&#x4EF6;&#x5D4C;&#x5957;,&#x9700;&#x8981;&#x5BFB;&#x627E;&#x4E00;&#x4E2A;&#x7A33;&#x5B9A;&#x7684;&#x8DEF;&#x7531;&#x4F53;&#x7CFB;,React-Router&#x5C31;&#x662F;&#x57FA;&#x4E8E;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x539F;&#x56E0;&#x6240;&#x9009;&#x62E9;&#x7684;&#x7EC4;&#x4EF6;.<br>React-Router&#x5E76;&#x975E;&#x4E00;&#x4E2A;&#x5B8C;&#x7F8E;&#x7684;&#x65B9;&#x6848;,&#x914D;&#x7F6E;&#x65B9;&#x5F0F;&#x4ECD;&#x65E7;&#x7E41;&#x7410;,&#x7136;&#x800C;&#x8FD9;&#x4E2A;&#x7EC4;&#x4EF6;&#x80FD;&#x5F88;&#x597D;&#x7684;&#x5951;&#x5408;Redux&#x548C;TS,&#x5F88;&#x597D;&#x7684;&#x878D;&#x5165;&#x4E86;&#x6574;&#x4E2A;&#x9879;&#x76EE;</p>
+<h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><p>&#x5355;&#x7EAF;&#x7684;&#x4E32;&#x8054;View,&#x4ECD;&#x7136;&#x4E0D;&#x8DB3;&#x5B8C;&#x7F8E;&#x7684;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x5E94;&#x7528;,&#x800C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x5408;&#x7406;&#x7684;&#x9A71;&#x52A8;&#x65B9;&#x5F0F;,&#x4E00;&#x4E2A;&#x901A;&#x8FC7;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x9A71;&#x52A8;&#x7684;&#x65B9;&#x5F0F;,Redux&#x89E3;&#x51B3;&#x4E86;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x95EE;&#x9898;.</p>
+<h3 id="redux-router"><a href="#redux-router" class="headerlink" title="redux-router"></a>redux-router</h3><p>&#x8DEF;&#x7531;&#x4E3A;&#x9010;&#x7EA7;&#x5339;&#x914D;,&#x56E0;&#x6B64;&#x56FA;&#x5B9A;&#x9879;&#x8981;&#x5199;&#x5728;&#x524D;&#x9762;,&#x5426;&#x5219;&#x4F1A;&#x5148;&#x5339;&#x914D;&#x5230;&#x53D8;&#x91CF;&#x800C;&#x51FA;&#x9519;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">{path: <span class="string">&apos;user/add&apos;</span>, component: UserAdd},</span><br><span class="line">{path: <span class="string">&apos;user/:id&apos;</span>, component: User},</span><br></pre></td></tr></table></figure></p>
+<h3 id="dev-tools"><a href="#dev-tools" class="headerlink" title="dev tools"></a>dev tools</h3><p> [react-router] <code>props.history</code> and <code>context.history</code> are deprecated. Please use <code>context.router</code>.<br> &#x662F;chrome&#x7684;dev tools&#x9519;&#x8BEF;,&#x53EF;&#x4EE5;&#x5FFD;&#x7565;.</p>
+<h3 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h3><p>react&#x5347;&#x7EA7;&#x5230;15.X&#x4E4B;&#x540E;<base href="/">&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x518D;&#x52A0;&#x4E86;,&#x5426;&#x5219;&#x4F1A;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#x63D0;&#x793A;,&#x53EF;&#x80FD;&#x662F;&#x5F03;&#x7528;&#x4E86;,&#x5B9E;&#x7528;&#x65E0;&#x5F71;&#x54CD;,&#x505A;&#x4E2A;&#x8BB0;&#x5F55;</p>
+<h2 id="&#x76EE;&#x5F55;"><a href="#&#x76EE;&#x5F55;" class="headerlink" title="&#x76EE;&#x5F55;"></a>&#x76EE;&#x5F55;</h2><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E00;-&#x2014;-&#x9879;&#x76EE;&#x5B89;&#x88C5;"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E00;-&#x2014;-&#x9879;&#x76EE;&#x5B89;&#x88C5;" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E00;) &#x2014;- &#x9879;&#x76EE;&#x5B89;&#x88C5;"></a><a href="/react/react-1/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E00;) &#x2014;- &#x9879;&#x76EE;&#x5B89;&#x88C5;</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E8C;-&#x2014;-webpack"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E8C;-&#x2014;-webpack" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E8C;) &#x2014;- webpack"></a><a href="/react/react-2/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E8C;) &#x2014;- webpack</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E09;-&#x2014;-typescript"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E09;-&#x2014;-typescript" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E09;) &#x2014;- typescript"></a><a href="/react/react-3/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E09;) &#x2014;- typescript</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x56DB;-&#x2014;-ts-node"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x56DB;-&#x2014;-ts-node" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x56DB;) &#x2014;- ts-node"></a><a href="/react/react-4/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x56DB;) &#x2014;- ts-node</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E94;-&#x2014;-react"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E94;-&#x2014;-react" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E94;) &#x2014;- react"></a><a href="/react/react-5/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E94;) &#x2014;- react</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x516D;-&#x2014;-redux"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x516D;-&#x2014;-redux" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x516D;) &#x2014;- redux"></a><a href="/react/react-6/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x516D;) &#x2014;- redux</a></h3><h3 id="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E03;-&#x2014;-&#x9879;&#x76EE;&#x4F5C;&#x7528;"><a href="#&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;-&#x4E03;-&#x2014;-&#x9879;&#x76EE;&#x4F5C;&#x7528;" class="headerlink" title="&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E03;) &#x2014;- &#x9879;&#x76EE;&#x4F5C;&#x7528;"></a><a href="/react/react-7/">&#x57FA;&#x4E8E;React&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;(&#x4E03;) &#x2014;- &#x9879;&#x76EE;&#x4F5C;&#x7528;</a></h3>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/react/react-6/" rel="next" title="基于React进行框架开发的理解(六) ---- redux">
+                <i class="fa fa-chevron-left"></i> 基于React进行框架开发的理解(六) ---- redux
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/react/react-4/" rel="prev" title="基于React进行框架开发的理解(四) ---- ts-node">
+                基于React进行框架开发的理解(四) ---- ts-node <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Aaron Jin" />
+          <p class="site-author-name" itemprop="name">Aaron Jin</p>
+          <p class="site-description motion-element" itemprop="description">前端研究笔记</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特性"><span class="nav-number">2.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX"><span class="nav-number">2.1.</span> <span class="nav-text">JSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件"><span class="nav-number">2.2.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件"><span class="nav-number">2.3.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Props"><span class="nav-number">2.4.</span> <span class="nav-text">Props</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟DOM"><span class="nav-number">2.5.</span> <span class="nav-text">虚拟DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件生命周期"><span class="nav-number">2.6.</span> <span class="nav-text">组件生命周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目心得"><span class="nav-number">3.</span> <span class="nav-text">项目心得</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择React的理由"><span class="nav-number">3.1.</span> <span class="nav-text">选择React的理由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Router"><span class="nav-number">3.2.</span> <span class="nav-text">Router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux"><span class="nav-number">3.3.</span> <span class="nav-text">Redux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redux-router"><span class="nav-number">3.4.</span> <span class="nav-text">redux-router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dev-tools"><span class="nav-number">3.5.</span> <span class="nav-text">dev tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5"><span class="nav-number">3.6.</span> <span class="nav-text">HTML5</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">4.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-一-—-项目安装"><span class="nav-number">4.1.</span> <span class="nav-text">基于React进行框架开发的理解(一) —- 项目安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-二-—-webpack"><span class="nav-number">4.2.</span> <span class="nav-text">基于React进行框架开发的理解(二) —- webpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-三-—-typescript"><span class="nav-number">4.3.</span> <span class="nav-text">基于React进行框架开发的理解(三) —- typescript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-四-—-ts-node"><span class="nav-number">4.4.</span> <span class="nav-text">基于React进行框架开发的理解(四) —- ts-node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-五-—-react"><span class="nav-number">4.5.</span> <span class="nav-text">基于React进行框架开发的理解(五) —- react</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-六-—-redux"><span class="nav-number">4.6.</span> <span class="nav-text">基于React进行框架开发的理解(六) —- redux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于React进行框架开发的理解-七-—-项目作用"><span class="nav-number">4.7.</span> <span class="nav-text">基于React进行框架开发的理解(七) —- 项目作用</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron Jin</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
